@@ -5,7 +5,7 @@
     <div class="block">
       <el-timeline>
 
-        <el-timeline-item :timestamp="blog.created" placement="top" v-for="blog in blogs">
+        <el-timeline-item :timestamp="blog.createTime" placement="top" v-for="(blog,i) in blogs" :key='i'>
           <el-card>
             <h4>
               <router-link :to="{name: 'BlogDetail', params: {blogId: blog.id}}">
@@ -40,7 +40,7 @@
     components: {Header},
     data() {
       return {
-        blogs: [1,2],
+        blogs: [{id:null,}],
         currentPage: 1,
         total: 0,
         pageSize: 5
@@ -50,12 +50,12 @@
       page(currentPage) {
         const _this = this
         _this.$axios.post("http://localhost:10580/api/blog/auth/page" ,{pageIndex:currentPage,pageSize:15}).then(res => {
-          console.log(res)
-          _this.blogs = res.data.data.records
-          _this.currentPage = res.data.data.current
-          _this.total = res.data.data.total
-          _this.pageSize = res.data.data.size
-
+          console.log('res',res)
+          _this.blogs = res.data.data.rows
+          // _this.currentPage = res.data.data.current
+          // _this.total = res.data.data.total
+          // _this.pageSize = res.data.data.size
+          console.log(this.blogs)
         })
       }
     },

@@ -26,7 +26,7 @@
     data() {
       return {
         user: {
-          username: '请先登录',
+          userName: '请先登录',
           avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
         },
         hasLogin: false
@@ -35,7 +35,7 @@
     methods: {
       logout() {
         const _this = this
-        _this.$axios.get("/logout", {
+        _this.$axios.get("http://localhost:10580/api/blog/auth/logout", {
           headers: {
             "Authorization": localStorage.getItem("token")
           }
@@ -46,8 +46,8 @@
       }
     },
     created() {
-      if(this.$store.getters.getUser.username) {
-        this.user.username = this.$store.getters.getUser.username
+      if(this.$store.getters.getUser.userName) {
+        this.user.userName = this.$store.getters.getUser.userName
         this.user.avatar = this.$store.getters.getUser.avatar
         this.hasLogin = true
       }

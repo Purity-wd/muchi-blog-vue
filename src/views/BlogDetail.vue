@@ -8,6 +8,7 @@
         <router-link :to="{name: 'BlogEdit', params: {blogId: blog.id}}" >
         编辑
         </router-link>
+                
       </el-link>
       <el-divider></el-divider>
       <div class="markdown-body" v-html="blog.content"></div>
@@ -37,7 +38,7 @@
       const blogId = this.$route.params.blogId
       console.log(blogId)
       const _this = this
-      this.$axios.get('/blog/' + blogId).then(res => {
+      this.$axios.post('api/blog/auth/findOne?id=' + blogId).then(res => {
         const blog = res.data.data
         _this.blog.id = blog.id
         _this.blog.title = blog.title

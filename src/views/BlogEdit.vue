@@ -40,8 +40,10 @@
         ruleForm: {
           title: '',
           description: '',
-          content: ''
+          content: '',
+          id:''
         },
+        urlId:null,
         rules: {
           title: [
             { required: true, message: '请输入标题', trigger: 'blur' },
@@ -59,9 +61,11 @@
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
+          this.ruleForm['id']=this.urlId
+          console.log(valid)
           if (valid) {
             const _this = this
-            this.$axios.post('/blog/edit', this.ruleForm, {
+            this.$axios.post('api/blog/auth/edit', this.ruleForm, {
               headers: {
                 "Authorization": localStorage.getItem("token")
               }
@@ -87,9 +91,10 @@
     created() {
       const blogId = this.$route.params.blogId
       console.log(blogId)
+      this.urlId=blogId
       const _this = this
       if(blogId) {
-        this.$axios.get('/blog/' + blogId).then(res => {
+        this.$axios.post('api/blog/auth/findOne?id=' + blogId).then(res => {
           const blog = res.data.data
           _this.ruleForm.title = blog.title
           _this.ruleForm.description = blog.description
