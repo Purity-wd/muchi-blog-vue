@@ -35,7 +35,7 @@
     methods: {
       logout() {
         const _this = this
-        _this.$axios.get("http://localhost:10580/api/blog/auth/logout", {
+        _this.$axios.get("http://121.36.1:10580/api/blog/auth/logout", {
           headers: {
             "Authorization": localStorage.getItem("token")
           }
