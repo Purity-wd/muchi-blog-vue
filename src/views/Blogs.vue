@@ -49,7 +49,7 @@
     methods: {
       page(currentPage) {
         const _this = this
-        _this.$axios.post("http://121.36.1:10580/api/blog/auth/page" ,{pageIndex:currentPage,pageSize:15}).then(res => {
+        _this.$axios.post("http://121.36.1.210:10580/api/blog/auth/page" ,{pageIndex:currentPage,pageSize:15}).then(res => {
           console.log('res',res)
           _this.blogs = res.data.data.rows
           // _this.currentPage = res.data.data.current
